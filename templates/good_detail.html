@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>
+        商品详情
+    </title>
+</head>
+<body>
+    <div class="main">
+        <h1>{{ data.title }}</h1>
+        <p>商品描述：{{ data.descreption }}</p>
+        <p>价格：{{ data.price }}</p>
+        购买数量：<input type="text" id="num">
+        <button onclick="order()">点击下单</button>
+    </div>
+</body>
+<script>
+    function order() {
+        fetch('http://api.hack.me/order/add',{
+            method: 'post',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                "id": {{ data.id }},
+                "num": document.getElementById('num').value
+            })
+        }).then((response)=>{
+            console.log(response)
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+</script>
+</html>

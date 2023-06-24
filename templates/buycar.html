@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>我的购物车</title>
+</head>
+<style type="text/css">
+    .item{
+        background: cadetblue;
+    }
+</style>
+<body>
+{% if data|length>0 %}
+    {% for item in data %}
+     <div id="item">
+          <p>{{ item.title }}，价格：{{ item.price }}， 购买数量:  {{ item.buy_num }}</p>
+     </div>
+ {% endfor %}
+    <p>订单总价：{{ amount }}</p>
+     <button onclick="submit_order()">提交订单</button>
+    {% else %}
+    {{ '购物车没有商品，请先添加商品' }}
+{% endif %}
+
+</body>
+<script>
+    function submit_order() {
+        fetch('http://api.hack.me/order/submit',{
+            method: "post"
+        }).then((data)=>{
+            return data.json()
+        }).then((ret)=>{
+            console.log(ret)
+            fetch('http://api.hack.me/order/pay',{
+                method: 'post',
+                body: JSON.stringify({
+                    orderid: ret.orderid
+                }),
+                headers: {
+                    "Content-Type":"application/json"
+                }
+            }).then((data)=>{
+                return data.json()
+            }).then((ret)=>{
+                if(ret.code==20001){
+                    window.location.replace('http://api.hack.me/order/success')
+                }
+            }).catch((error)=>{
+                console.log(error)
+            })
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+</script>
+</html>

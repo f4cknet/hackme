@@ -1,0 +1,19 @@
+<html>
+<head><title>
+    商品列表
+</title></head>
+<style>
+    .contain{
+        background: cadetblue;
+    }
+</style>
+<body>
+    {% for da in data %}
+        <div class="contain">
+        <h2>{{ da.title }}</h2>
+        <p>价格：{{ da.price }}</p>
+            <a href="detail?id={{ da.id }}">查看详情</a>>
+        </div>
+    {% endfor %}
+</body>
+</html>

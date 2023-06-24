@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>评论专区</title>
+</head>
+<body>
+<form action="/feedback" method="post">
+    email:<input type="text" name="email">
+    评论: <input type="text" name="feedback">
+     <button type="submit">提交评论</button>
+</form>
+{% for h in data %}
+    <div class="main">
+        email:{{ h.email }} || feedback: {{ h.feedback |  safe }}
+    </div>
+{% endfor %}
+
+</body>
+</html>

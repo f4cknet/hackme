@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>订单详情</title>
+</head>
+<body>
+    <p>订单编号: {{ data.orderid }}</p>
+    {% for good in data.goods %}
+        <div id="order">
+           商品名称：{{ good.title }} ｜｜ 价格：{{ good.price }} || 购买数量：{{ good.buy_num }}
+        </div>
+    {% endfor %}
+    <p>订单总价：{{ data.amount }}</p>
+
+
+</body>
+</html>
