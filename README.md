@@ -29,5 +29,3 @@ export wxsecret="小程序secret"
 
 #### 参与贡献
 
-#### DEMO
-https://api.itner.net
